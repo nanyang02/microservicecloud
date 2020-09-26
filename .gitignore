@@ -1,0 +1,16 @@
+.idea
+out
+target
+*.iml
+.settings
+.classpath
+.project
+*/.classpath
+*/.project
+*/*.iml
+*/target
+*/.settings
+*/.idea
+*/out
+*/dist
+*/build
