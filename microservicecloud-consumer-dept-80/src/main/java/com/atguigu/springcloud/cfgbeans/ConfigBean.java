@@ -25,8 +25,8 @@ public class ConfigBean {
     // 只需要指明,我要用的负债均衡的算法实例即可切换我们的负载均衡的策略.
     // 简而言之,就是我们不用默认的轮训,而是如此处的修改为随机.
     // 注意,ribbon默认提供了我们7中类型的均衡算法供我们选择.
-    @Bean
-    public IRule getIRule() {
-        return new RandomRule();
-    }
+//    @Bean
+//    public IRule getIRule() {
+//        return new RandomRule();
+//    }
 }
