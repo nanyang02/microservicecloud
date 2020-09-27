@@ -1,6 +1,8 @@
 package com.atguigu.springcloud.cfgbeans;
 
 import com.atguigu.springcloud.entities.Dept;
+import com.netflix.loadbalancer.IRule;
+import com.netflix.loadbalancer.RandomRule;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,5 +19,14 @@ public class ConfigBean {
     @LoadBalanced
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
+    }
+
+
+    // 只需要指明,我要用的负债均衡的算法实例即可切换我们的负载均衡的策略.
+    // 简而言之,就是我们不用默认的轮训,而是如此处的修改为随机.
+    // 注意,ribbon默认提供了我们7中类型的均衡算法供我们选择.
+    @Bean
+    public IRule getIRule() {
+        return new RandomRule();
     }
 }
