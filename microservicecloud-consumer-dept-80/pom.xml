@@ -25,7 +25,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Ribbon 相关,需要从注册中心取,并实现客户端的负载均衡 -->
+        <!-- Ribbon 相关,需要从注册中心取,并实现`客户端`的`负载均衡` -->
         <!-- 注册进注册中心需要添加以来包 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
