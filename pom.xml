@@ -89,7 +89,9 @@
 		<module>microservicecloud-eureka-7003</module>
 		<module>microservicecloud-provider-dept-8002</module>
 		<module>microservicecloud-provider-dept-8003</module>
-	</modules>
+        <module>microservicecloud-workfllow-entity</module>
+        <module>microservicecloud-workfllow-8011</module>
+    </modules>
 
 	<!--
 	在完成注册中心和微服务注册进注册中心后,需要解决,从注册中心跳转页面info信息页面报错的问题的处理

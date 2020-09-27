@@ -12,6 +12,7 @@
 
 	<!-- 当前模块自己叫什么名字 -->
 	<artifactId>microservicecloud-api</artifactId>
+    <packaging>jar</packaging>
 
 	<!-- public class microservicecloud-api extends microservicecloud 就是继承和复写 -->
 

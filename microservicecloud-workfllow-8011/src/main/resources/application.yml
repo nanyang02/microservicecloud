@@ -1,13 +1,15 @@
 server:
- port: 8001
+ port: 8011
 
 mybatis:
  config-location: classpath:mybatis/mybatis.cfg.xml             # mybatis configure file.
  # more than one package need use `,` separate.
- type-aliases-package: com.atguigu.springcloud.entities    # the package of all Entity alias class.
+ type-aliases-package: com.atguigu.springcloud.entites.struct,\
+  com.atguigu.springcloud.entites.instance,\
+  com.atguigu.springcloud.entites.template # the package of all Entity alias class.
  mapper-locations:
   #- calsspath:mybatis/mapper/**/*.xml                                      # mapper mapping file location
-  - classpath:mybatis/mapper/*.xml
+  - classpath:mybatis/mapper/*/*.xml
 
 spring:
  application:
