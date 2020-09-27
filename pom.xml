@@ -91,6 +91,7 @@
 		<module>microservicecloud-provider-dept-8003</module>
         <module>microservicecloud-workfllow-entity</module>
         <module>microservicecloud-workfllow-8011</module>
+        <module>microservicecloud-consumer-dept-feign</module>
     </modules>
 
 	<!--

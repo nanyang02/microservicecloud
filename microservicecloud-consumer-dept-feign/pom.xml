@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>microservicecloud</artifactId>
+        <groupId>com.atguigu.springcloud</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>microservicecloud-consumer-dept-feign</artifactId>
+
+    <!--
+
+    1. 首先思考一下,我们这个是需要将一部分的接口给打包成一组统一的功能服务客户端.
+    - 比如我们和其他系统做对接的时候,就专门搞一个Exchange服务,这个并不是特殊的东西,本质上还是需要
+    调用我们自己的微服务接口来提供服务支撑.
+
+    (1) 首先是需要和注册中心打交道,所以需要将自己作为客户端.
+    (2) 需要通过一个个的服务的名称来获取服务接口
+    (3) 组织需要对外提供的服务的统一接口服务
+    (4) 测试运行代码
+
+    以上就是我的具体的分析的结果.
+    1.1 添加pom修改.
+    -->
+
+    <dependencies>
+        <!-- 引用自定义的api通用包,可以适用Dept部门Entity -->
+        <dependency>
+            <groupId>com.atguigu.springcloud</groupId>
+            <artifactId>microservicecloud-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Feign 相关 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+
+
+        <!-- Ribbon 相关,需要从注册中心取,并实现`客户端`的`负载均衡` -->
+        <!-- 注册进注册中心需要添加以来包 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+        <!-- Ribbon -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-ribbon</artifactId>
+        </dependency>
+
+        <!-- 标配 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <!-- web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 热部署 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>springloaded</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>
