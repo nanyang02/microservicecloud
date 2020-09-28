@@ -13,6 +13,7 @@ import java.util.List;
  * 指定一个微服务,然后定一个接口.
  */
 @FeignClient("MICROSERVICECLOUD-DEPT")
+//@FeignClient(name = "MICROSERVICECLOUD-DEPT")
 public interface DeptClientService {
 
     // 此处是直接调用提供者的,所以要注意,mapping的地址要是提供者的url

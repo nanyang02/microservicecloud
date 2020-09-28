@@ -29,7 +29,7 @@ spring:
 eureka:
  client:
   service-url:
-   defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+   defaultZone: http://eureka7001.com:7001/eureka #,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
  # 额外的优化配置小细节(非必须的,只是能更好)
  instance:
   instance-id: microservicecloud-dept8001 # 配置后,在注册中心 `Status` UP(1) 后面跟着的名称就是此处定义的

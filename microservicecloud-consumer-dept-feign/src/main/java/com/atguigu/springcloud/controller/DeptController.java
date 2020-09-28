@@ -1,4 +1,4 @@
-package atguigu.springcloud.controller;
+package com.atguigu.springcloud.controller;
 
 import com.atguigu.springcloud.entities.Dept;
 import com.atguigu.springcloud.service.DeptClientService;
