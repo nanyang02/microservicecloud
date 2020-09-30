@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.springcloud.dao.WfTypeDao">
+    <select id="findAll" resultType="com.atguigu.springcloud.entites.struct.WfType">
+      select * from mywf.wf_str_type;
+    </select>
+
+    <insert id="add" parameterType="com.atguigu.springcloud.entites.struct.WfType">
+        insert into mywf.wf_str_type(wf_key, wf_name, sort, "desc", valid) values (
+        <if test="wfKey != null">#{wfKey}</if>
+        <if test="wfKey == null or ">#{wfKey}</if>
+        #{wfName},
+        <if test="desc == null">
+            '',
+        </if>
+        <if test="desc != null">
+            #{desc},
+        </if>
+        <if test="valid == null">
+            0
+        </if>
+        <if test="valid != null">
+            #{valid}
+        </if>
+        )
+    </insert>
+
+    <!--<update id="updateName" parameterType="com.atguigu.springcloud.entites.struct.WfType">-->
+        <!--UPDATE wf_str_type-->
+        <!--<set>-->
+            <!--wf_name = #{wfName}-->
+        <!--</set>-->
+        <!--WHERE wf_id = #{wfId}-->
+    <!--</update>-->
+
+    <update id="update" parameterType="com.atguigu.springcloud.entites.struct.WfType">
+        UPDATE wf_str_type
+        <!-- 用set标签代替set语句,主要解决的是值条件来决定是否作用于本次sql -->
+        <set>
+            <!-- and sort !='' -->
+            <if test="sort!=null">
+                sort=#{sort},
+            </if>
+            <!-- 如果有多个条件检查的，都放在这个set标签下面就可以啦 -->
+
+            <!--  对valid的两种处理策略 -->
+            <if test="valid == null">
+                valid=0
+            </if>
+            <if test="valid != null">
+                valid=#{valid, jdbcType=BOOLEAN}
+            </if>
+        </set>
+        WHERE wf_id = #{wfId}
+    </update>
+
+
+    <delete id="deleteById" parameterType="integer">
+        delete from mywf.wf_str_type where mywf.wf_str_type.wf_id = #{id}
+    </delete>
+
+    <!--
+     1) 根据ids获取多个流程
+     -->
+    <select id="findByIds" resultType="com.atguigu.springcloud.entites.struct.WfType">
+        select * from wf_str_type
+        <!--此处必须使用list 不能使用参数名-->
+        <if test="ids.size>0">
+            where wf_id IN
+            <foreach collection="ids" open="(" close=")" separator="," item="item">
+                #{item}<!--item此时表示集合中的元素User对象-->
+            </foreach>
+        </if>
+    </select>
+</mapper>

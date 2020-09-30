@@ -17,17 +17,17 @@ public class WfType {
     /**
      * 流程类型id, 自增主键
      */
-    private Integer fwId;
+    private Integer wfId;
 
     /**
-     * 流程类型的key(冗余,也可以作为唯一校验,但是此处不强制,主要使用fwId)
+     * 流程类型的key(冗余,也可以作为唯一校验,但是此处不强制,主要使用wfId)
      */
-    private String fwKey;
+    private String wfKey;
 
     /**
      * 流程类型的名称
      */
-    private String fwName;
+    private String wfName;
 
     /**
      * 排序

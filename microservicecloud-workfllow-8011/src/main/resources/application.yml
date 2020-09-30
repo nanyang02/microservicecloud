@@ -1,45 +1,47 @@
 server:
- port: 8011
+  port: 8011
 
 mybatis:
- config-location: classpath:mybatis/mybatis.cfg.xml             # mybatis configure file.
- # more than one package need use `,` separate.
- type-aliases-package: com.atguigu.springcloud.entites.struct,\
-  com.atguigu.springcloud.entites.instance,\
-  com.atguigu.springcloud.entites.template # the package of all Entity alias class.
- mapper-locations:
-  #- calsspath:mybatis/mapper/**/*.xml                                      # mapper mapping file location
-  - classpath:mybatis/mapper/*/*.xml
+  # config-location: classpath:mybatis/mybatis.cfg.xml             # mybatis configure file.
+  # more than one package need use `,` separate.
+  type-aliases-package: com.atguigu.springcloud.entites.struct, com.atguigu.springcloud.entites.instance, com.atguigu.springcloud.entites.template # the package of all Entity alias class.
+  mapper-locations:
+    #- calsspath:mybatis/mapper/**/*.xml                                      # mapper mapping file location
+    - classpath:mybatis/mapper/*/*.xml
+  configuration: # it is replace the config-file of `mybatis.cfg.xml`. choose the one of this double-way
+    map-underscore-to-camel-case: true # enable camel trans
+    cache-enabled: true # enable two-level cache
+
 
 spring:
- application:
-  name: microservicecloud-dept
- datasource:
-  type: com.alibaba.druid.pool.DruidDataSource                # current database datasource type
-  #driver-class-name: org.gjt.mm.mysql.Driver
-  driver-class-name: com.mysql.jdbc.Driver                          # mysql Driver class
-  url: jdbc:mysql://localhost:3306/cloudDB01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=true
-   # db name
-  username: root
-  password: root
-  dbcp2:
-   min-idle: 5                                                                                    # min connect size
-   initial-size: 5                                                                                 # init connect size
-   max-total: 5                                                                                 # max connect size
-   max-wait-millis: 200                                                                  # max time of wait connect
+  application:
+    name: microservicecloud-workfllow
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource                # current database datasource type
+    #driver-class-name: org.gjt.mm.mysql.Driver
+    driver-class-name: com.mysql.jdbc.Driver                          # mysql Driver class
+    url: jdbc:mysql://localhost:3306/mywf?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=true
+    # db name
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5                                                                                    # min connect size
+      initial-size: 5                                                                                 # init connect size
+      max-total: 5                                                                                 # max connect size
+      max-wait-millis: 200                                                                  # max time of wait connect
 
 eureka:
- client:
-  service-url:
-   defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
- # 额外的优化配置小细节(非必须的,只是能更好)
- instance:
-  instance-id: microservicecloud-dept8001 # 配置后,在注册中心 `Status` UP(1) 后面跟着的名称就是此处定义的
-  prefer-ip-address: true # 在鼠标放在 `Status` UP(1) 后面的名字上,左下角会显示真实的ip和端口(方便知道这个服务的提供者在那个主机端口)
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka #,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+  # 额外的优化配置小细节(非必须的,只是能更好)
+  instance:
+    instance-id: microservicecloud-workfllow8011 # 配置后,在注册中心 `Status` UP(1) 后面跟着的名称就是此处定义的
+    prefer-ip-address: true # 在鼠标放在 `Status` UP(1) 后面的名字上,左下角会显示真实的ip和端口(方便知道这个服务的提供者在那个主机端口)
 
 
 info:
- app.name: atguigu-microservicecloud
- company.name: www.atguigu.com
- build.artifactId: $project.artifactId$
- build.version: $project.version$
+  app.name: atguigu-microservicecloud
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

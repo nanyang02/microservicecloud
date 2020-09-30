@@ -20,6 +20,14 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- 使用entity包 -->
+        <dependency>
+            <groupId>com.atguigu.springcloud</groupId>
+            <artifactId>mircoservicecloud-common</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

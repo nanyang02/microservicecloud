@@ -7,7 +7,7 @@
 	- 热加载缓存，就是说，资源的问题需要进行先预热。加载到缓存中。
 *************************************************************************/
 
-create database myfw default character set utf8 collate utf8_general_ci;
+create database mywf default character set utf8 collate utf8_general_ci;
 
 use myfw;
 
@@ -18,13 +18,13 @@ use myfw;
 drop table wf_str_type;
 create table wf_str_type
 (
-  `fw_id`   int                      not null AUTO_INCREMENT comment '流程类型id',
-  `fw_key`  varchar(30)              default '' comment '类型关键字',
-  `fw_name` varchar(30)              not null comment '类型名称',
+  `wf_id`   int                      not null AUTO_INCREMENT comment '流程类型id',
+  `wf_key`  varchar(30)              default '' comment '类型关键字',
+  `wf_name` varchar(30)              not null comment '类型名称',
   `sort`    int(11)      default '0' not null comment '排序',
   `desc`    varchar(100) default null comment '备注',
   `valid`   tinyint(4)   default '1' not null comment '是否有效：1 - 有效；0 - 无效',
-  primary key (`fw_id`),
+  primary key (`wf_id`),
   key `ind_wfstr_type_search` (`sort`, `valid`)
 ) engine = innodb comment ='流程类型';
 
@@ -36,7 +36,7 @@ create table `wf_str_method`
 (
   `m_id`     int                     not null AUTO_INCREMENT comment '方法主键',
   `m_name`   varchar(30)             not null comment '方法名称',
-  `fw_id`    int                     not null comment '流程的id',
+  `wf_id`    int                     not null comment '流程的id',
   `m_class`  varchar(100)            not null comment '类名',
   `m_method` varchar(30)             not null comment '方法名',
   `m_bean`   varchar(50) default null comment '实例名',
@@ -52,13 +52,13 @@ create table `wf_str_method`
 drop table wf_str_var;
 create table `wf_str_var`
 (
-  `fw_id`    int                      not null comment '类型关键字',
+  `wf_id`    int                      not null comment '类型关键字',
   `var_key`  varchar(30)              not null comment '变量关键字',
   `var_name` varchar(30)              not null comment '变量名称',
   `desc`     varchar(100) default null comment '备注',
   `sort`     int(11)      default '0' not null comment '排序',
   `valid`    tinyint(4)   default '1' not null comment '是否有效：1 - 有效；0 - 无效',
-  primary key (`fw_id`, `var_key`),
+  primary key (`wf_id`, `var_key`),
   key `ind_wfstr_var_search` (`sort`, `valid`)
 ) engine = innodb comment ='流程变量';
 
@@ -83,12 +83,12 @@ create table `wf_tmp_status`
   `s_id`   int AUTO_INCREMENT comment '状态关键字',
   `s_name` varchar(30)  default null comment '状态名称',
   `s_key`  varchar(30)  default null comment '状态关键字',
-  `fw_id`  int                    not null comment '流程id',
+  `wf_id`  int                    not null comment '流程id',
   `sort`   int(11)      default 0 not null comment '排序',
   `desc`   varchar(100) default null comment '备注',
   primary key (`s_id`),
   key `ind_wftmp_status_key` (`s_key`),
-  key `ind_wftmp_status_search` (`fw_id`, `sort`)
+  key `ind_wftmp_status_search` (`wf_id`, `sort`)
 ) engine = innodb comment ='流程状态';
 
 /***********************************************************************
@@ -104,13 +104,13 @@ create table `wf_tmp_status`
 drop table wf_str_view;
 create table `wf_str_view`
 (
-  `fw_id`     int                      not null comment '流程id',
+  `wf_id`     int                      not null comment '流程id',
   `res_key`   varchar(30)              not null comment '关联资源',
   `view_name` varchar(30)              not null comment '界面名称',
   `sort`      int(11)      default '0' not null comment '排序',
   `desc`      varchar(100) default null comment '备注',
   `valid`     tinyint(4)   default '1' not null comment '是否有效：1 - 有效；0 - 无效',
-  primary key (`fw_id`, `res_key`),
+  primary key (`wf_id`, `res_key`),
   key `ind_wfstr_viw_search` (`sort`, `valid`)
 ) engine = innodb comment ='流程界面';
 
@@ -118,10 +118,10 @@ create table `wf_str_view`
 drop table wf_str_view_variable;
 create table `wf_str_view_variable`
 (
-  `fw_id`   int         not null comment '流程id',
+  `wf_id`   int         not null comment '流程id',
   `res_key` varchar(30) not null comment '资源key',
   `var_key` varchar(30) not null comment '流程变量key',
-  primary key (`fw_id`, `res_key`, `var_key`)
+  primary key (`wf_id`, `res_key`, `var_key`)
 ) engine = innodb comment ='流程界面变量';
 
 ## 流程界面操作
@@ -129,16 +129,16 @@ drop table wf_str_view_operat;
 create table `wf_str_view_operat`
 (
   `opt_key` varchar(30) not null comment '流程操作',
-  `fw_id`   int         not null comment '类型关键字',
+  `wf_id`   int         not null comment '类型关键字',
   `res_key` varchar(30) default null comment '资源编码',
-  unique key `unq_wfstr_vo` (`fw_id`, `res_key`, `opt_key`)
+  unique key `unq_wfstr_vo` (`wf_id`, `res_key`, `opt_key`)
 ) engine = innodb comment ='流程界面操作';
 
 ## 操作流向（与实例无关）
 drop table wf_str_operat_view;
 create table `wf_str_operat_view`
 (
-  `fw_id`      int         not null comment '类型关键字',
+  `wf_id`      int         not null comment '类型关键字',
   `res_key`    varchar(30) default null comment '资源编码',
   `operat_key` varchar(30) not null comment '流程操作',
   unique key `unq_wfstr_ov` (`type_key`, `res_key`, `operat_key`)
@@ -177,7 +177,7 @@ create table `wf_tmp_node`
 (
   `node_id`   int                      not null comment '节点关键字',
   `node_name` varchar(30)  default null comment '节点名称',
-  `fw_id`     int                      not null comment '类型关键字',
+  `wf_id`     int                      not null comment '类型关键字',
   `tem_id`    int                      not null comment '流程模版',
   `res`       varchar(50)  default null comment '节点界面（这个是权限问题的）',
   `priority`  tinyint(4)               not null comment '优先级',
@@ -185,7 +185,7 @@ create table `wf_tmp_node`
   `sort`      int(11)      default '0' not null comment '排序',
   `desc`      varchar(100) default null comment '备注',
   primary key (`node_id`),
-  key `ind_wftmp_node_search` (`fw_id`, `tem_id`, `priority`)
+  key `ind_wftmp_node_search` (`wf_id`, `tem_id`, `priority`)
 ) engine = innodb comment ='流程节点';
 
 ## 动作
@@ -230,7 +230,7 @@ drop table wf_ins_process;
 create table `wf_ins_process`
 (
   `pro_id` bigint      not null comment '流程关键字',
-  `fw_id`  int         not null comment '流程关键字',
+  `wf_id`  int         not null comment '流程关键字',
   `tem_id` int         not null comment '模板关键字',
   `ts`     bigint      not null comment '创建时间',
   `u`      varchar(50) default null comment '创建用户',

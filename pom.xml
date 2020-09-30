@@ -74,7 +74,6 @@
 				<artifactId>log4j</artifactId>
 				<version>${log4j.version}</version>
 			</dependency>
-
 		</dependencies>
 
 	</dependencyManagement>
@@ -93,6 +92,7 @@
         <module>microservicecloud-workfllow-8011</module>
         <module>microservicecloud-consumer-dept-feign</module>
         <module>microservicecloud-zuul-9527</module>
+        <module>mircoservicecloud-common</module>
     </modules>
 
 	<!--
